@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="container">
+  <view wx:if="{{!hasUserInfo && canIUse}}" class="userinfo">
+    <button class='login' open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+  </view>
+	<view wx:if="{{prize!=null}}" class='head-prize'></view>
+	<view wx:if="{{prize==null}}" class='head'></view>
+	<view wx:if="{{prize!=null}}" class='package-prize'>
+		<text class='prize'>{{prize}}</text>
+		<text class='txt'>不删档开启后7日后通过游戏内邮件发放\n记得赶快建立角色哦</text>
+	</view>
+	<view wx:if="{{prize==null}}" class='package'>
+		<button wx:if="{{count==5}}" bindtap='luckDrawTap' class='package-btn'></button>
+		<button wx:if="{{count<5}}" class='package-btn-d'></button>
+	</view>
+	<view wx:if='{{rule}}' class='rule'>
+		<text class='rule-title'>活动规则</text>
+		<button bindtap="closeRuleTap" class='close'></button>
+		<text class='rule-text'>
+			活动时间：2018年6月8日-6月11日；
+			活动规则：5位玩家一起组队，即可成功组队拆开道具红包；每位玩家只可组队1次，不能重复组队；获得道具奖励，不删档后7个工作日发送至最近登录角色，请提前建立角色；
+		</text>
+	</view>
+	<button wx:if="{{prize==null}}" open-type='share' class='btn-inviting-friends'></button>
+	<view class='team'>
+		<view wx:if="{{count==5}}" class='team-i'></view>
+		<text>成功组队好友:{{count}}/5</text>
+		<view>
+			<view wx:for="{{list}}" wx:key="key"><image wx:if="{{item.pic != ''}}" src='{{item.pic}}'></image></view>
+		</view>
+	</view>
+	<button bindtap="openRuleTap" class='rule-btn'>活动规则</button>
+</view>
